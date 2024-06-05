@@ -30,6 +30,9 @@ $(RGB_LIBRARY): FORCE
 text-scroller: text-scroller.o $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) text-scroller.o -o $@ $(LDFLAGS) $(RGB_LDFLAGS)
 
+bdf-converter: bdf-converter.o
+	$(CXX) $(CXXFLAGS) bdf-converter.o -o $@ $(LDFLAGS)
+
 led-image-viewer: led-image-viewer.o $(RGB_LIBRARY)
 	$(CXX) $(CXXFLAGS) led-image-viewer.o -o $@ $(LDFLAGS) $(RGB_LDFLAGS) $(MAGICK_LDFLAGS)
 
@@ -44,6 +47,9 @@ led-image-viewer.o : led-image-viewer.cc
 
 clean:
 	rm -f $(OBJECTS) $(BINARIES) $(OPTIONAL_OBJECTS) $(OPTIONAL_BINARIES)
+
+run: bdf-converter
+	./bdf-converter ../fonts/5x7.bdf ../fonts/5-nx7.bdf
 
 FORCE:
 .PHONY: FORCE
