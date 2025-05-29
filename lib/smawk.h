@@ -1,15 +1,33 @@
 // -*- mode: c++; c-basic-offset: 2; indent-tabs-mode: nil; -*-
 //
-// C++ implementation of the [SMAWK
-// algorithm](https://en.wikipedia.org/wiki/SMAWK_algorithm) for
-// finding row or column minima in a totally monotone matrix with 
-// *m* rows and *n* columns in time O(*m* + *n*). This is much better
-// than the brute force solution which would take O(*mn*). When *m*
-// and *n* are of the same order, this turns a quadratic function
-// into a linear function.
+// C++ implementation of the SMAWK algorithm (see
+// https://en.wikipedia.org/wiki/SMAWK_algorithm) for finding row  or column
+// minima in a totally monotone matrix with *m* rows and *n* columns in
+// time O(*m* + *n*). This is much better than the brute force solution 
+// which would take O(*mn*). When *m* and *n* are of the same order, this
+// turns a quadratic function into a linear function.
 // 
-// This code is a C++ porting of the Rust implementation from
-// https://github.com/mgeisler/smawk/ from Martin Geisler
+// This code is a C++ port of the Rust implementation from
+// https://github.com/mgeisler/smawk/ by Martin Geisler released under the
+// MIT License:
+//
+// Copyright (c) 2017 Martin Geisler
+//
+// The following MIT License applies to the relevant portions of this file:
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to 
+// deal in the Software without restriction, including without limitation the 
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software. 
+//
+// This modified version is part of a project licensed under the GNU General
+// Public License version 2 (GPLv2). See the file LICENSE for the full GPLv2
+// license text.
 
 #include <functional>
 #include <numeric>

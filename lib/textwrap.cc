@@ -10,13 +10,30 @@
 // penalized more heavily since they leave behind a larger gap.
 //
 // Searching through all possible combinations would normally be
-// prohibitively slow. We therefore use a [linear-time algorithm
-// called SMAWK](https://en.wikipedia.org/wiki/SMAWK_algorithm)
-// to find the optimal break points.
+// prohibitively slow. We therefore use a linear-time algorithm called
+// SMAWK (see https://en.wikipedia.org/wiki/SMAWK_algorithm) to find the
+// optimal break points.
 //
-// This code is a C++ porting of the Rust implementation from
+// This code is a C++ port of the Rust implementation from
 // https://github.com/mgeisler/textwrap/blob/master/src/wrap_algorithms/optimal_fit.rs
-// from Martin Geisler.
+// by Martin Geisler released under the MIT License:
+//
+// Copyright (c) 2016 Martin Geisler
+//
+// The following MIT License applies to the relevant portions of this file:
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to 
+// deal in the Software without restriction, including without limitation the 
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software. 
+//
+// This modified version is part of a project licensed under the GNU General
+// Public License 
 
 #include <vector>
 #include <algorithm>
