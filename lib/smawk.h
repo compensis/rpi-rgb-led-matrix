@@ -1,11 +1,12 @@
 // -*- mode: c++; c-basic-offset: 2; indent-tabs-mode: nil; -*-
 //
-// C++ Implementation of the SMAWK algorithm for finding row
-// or column minima in a totally monotone matrix with *m* rows and
-// *n* columns in time O(*m* + *n*). This is much better than the
-// brute force solution which would take O(*mn*). When *m* and *n*
-// are of the same order, this turns a quadratic function into a
-// linear function.
+// C++ implementation of the [SMAWK
+// algorithm](https://en.wikipedia.org/wiki/SMAWK_algorithm) for
+// finding row or column minima in a totally monotone matrix with 
+// *m* rows and *n* columns in time O(*m* + *n*). This is much better
+// than the brute force solution which would take O(*mn*). When *m*
+// and *n* are of the same order, this turns a quadratic function
+// into a linear function.
 // 
 // This code is a C++ porting of the Rust implementation from
 // https://github.com/mgeisler/smawk/ from Martin Geisler
@@ -31,7 +32,7 @@ void smawk_inner(
   vector<size_t>* minima
 ) {
   if (cols.size() == 0) {
-    return; // If there are no columns left, end the recursion
+    return; // No columns left, end recursion.
   }
 
   // Creat reduced matrix onsists of surviving rows and all columns.
@@ -59,23 +60,23 @@ void smawk_inner(
   }
   smawk_inner(rows_stack, odd_cols, matrix, minima);
 
-  // Compute the minima for the even-indexed columns
+  // Compute minima for even-indexed columns
   size_t r = 0;
   for (size_t c = 0; c < cols.size(); c += 2) {
     size_t col = cols[c];
     size_t row = rows_stack[r];
     size_t last_row;
 
-    // Determine the last row to be considered in the current column
+    // Determine the last row to consider for the current column
     if (c == cols.size() - 1) {
-      // If it's the last column, take the last row
+      // For the last column, use the last row
       last_row = rows_stack.back();
     } else {
-      // Otherwise, take the minimum of the next column
+      // Otherwise, use the minimum row from the next column
       last_row = (*minima)[cols[c + 1]];
     }
 
-    // Initialize the matrix value at the first position
+    // Initialize with the matrix value at the first position
     size_t value = matrix(row, col);
 
     // Set the current row as the initial minimum
@@ -89,7 +90,7 @@ void smawk_inner(
       size_t new_value = matrix(row, col);
       if (new_value < value) {
         value = new_value;
-        minimum = row; // new minimum found
+        minimum = row; // New minimum found
       }
     }
 
@@ -98,7 +99,7 @@ void smawk_inner(
   }
 }
 
-// Compute upper-right column minima in O(*m* + *n*) time.
+// Computes upper-right column minima in O(*m* + *n*) time.
 //
 // The input matrix must be totally monotone.
 //
@@ -140,7 +141,7 @@ vector<size_t> online_column_minima(
   // (starting with the initial value)
   vector<T> values{initial};
 
-  // State used by the algorithm.
+  // State used by the algorithm
   size_t finished = 0;  // Index of the last processed row
   size_t base = 0;      // Base index for the calculation of minima
   size_t tentative = 0; // The current "tentative" index, which might
