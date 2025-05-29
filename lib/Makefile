@@ -5,8 +5,8 @@
 ##
 OBJECTS=gpio.o led-matrix.o options-initialize.o framebuffer.o \
         thread.o bdf-font.o graphics.o led-matrix-c.o hardware-mapping.o \
-        pixel-mapper.o multiplex-mappers.o \
-	content-streamer.o
+        pixel-mapper.o multiplex-mappers.o content-streamer.o \
+        textwrap.o typesetting.o
 
 TARGET=librgbmatrix
 
