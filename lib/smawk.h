@@ -33,6 +33,8 @@
 #include <numeric>
 #include <vector>
 #include <unordered_map>
+#include <cassert>
+#include <iostream>
 
 namespace smawk {
 
@@ -171,7 +173,9 @@ vector<size_t> online_column_minima(
   while (finished < size - 1) {
 
     // Lambda function for evaluating the matrix given the current computed values
-    auto _matrix = [&values, &matrix](size_t i,size_t j) -> T {
+    auto _matrix = [&values, &matrix, size](size_t i,size_t j) -> T {
+      assert(i < j);                  // (i, j) not above diagonal
+      assert(i < size && j < size);   // (i, j) out of bounds
       return matrix(values, i, j);
     };
 
