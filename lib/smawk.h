@@ -154,10 +154,11 @@ vector<size_t> online_column_minima(
   const function<T(vector<T>&, size_t, size_t)>& matrix
 ) {
   // Initialize result vector to store the row indices of the column minima
-  vector<size_t> result{0};
+  vector<size_t> result{0};   // result[j] = row with min in column j 
+
   // Initialize values vector to store the minima for each column
   // (starting with the initial value)
-  vector<T> values{initial};
+  vector<T> values{initial};  // values[j] = min value in column j
 
   // State used by the algorithm
   size_t finished = 0;  // Index of the last processed row
@@ -170,9 +171,8 @@ vector<size_t> online_column_minima(
   while (finished < size - 1) {
 
     // Lambda function for evaluating the matrix given the current computed values
-    auto _matrix = [&finished, &values, &matrix](size_t i,size_t j) -> T {
-      vector<T> previously_computed_values = {values.begin(), values.begin() + finished + 1};
-      return matrix(previously_computed_values, i, j);
+    auto _matrix = [&values, &matrix](size_t i,size_t j) -> T {
+      return matrix(values, i, j);
     };
 
     // First case: we have already advanced past the previous
@@ -195,7 +195,7 @@ vector<size_t> online_column_minima(
       smawk_inner<T>(rows, cols, _matrix, &minima);
 
       // Update the minima for each column based on the computed values
-      for_each(begin(cols), end(cols), [&_matrix, &minima, &result, &values](size_t &col) {
+      for (size_t &col : cols) {
         auto row = minima[col];     // Row with the minimum for the current column
         auto v = _matrix(row, col); // Value of the matrix entry at this position
 
@@ -208,7 +208,7 @@ vector<size_t> online_column_minima(
           result[col] = row;
           values[col] = v;
         }
-      });
+      }
 
       // Update the index of the last processed row
       finished = i;
