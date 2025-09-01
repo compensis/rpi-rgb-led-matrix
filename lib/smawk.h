@@ -55,7 +55,7 @@ void smawk_inner(
     return; // No columns left, end recursion.
   }
 
-  // Creat reduced matrix onsists of surviving rows and all columns.
+  // Create reduced matrix onsists of surviving rows and all columns.
   // The columns minima of the reduced matrix are the columns minima
   // of the initial matrix.
   vector<size_t> rows_stack; // Stack of surviving rows
