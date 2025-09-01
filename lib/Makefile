@@ -187,6 +187,7 @@ led-matrix.o: led-matrix.cc $(INCDIR)/led-matrix.h
 thread.o : thread.cc $(INCDIR)/thread.h
 framebuffer.o: framebuffer.cc framebuffer-internal.h
 graphics.o: graphics.cc utf8-internal.h
+textwrap.o: textwrap.h smawk.h
 
 %.o : %.cc compiler-flags
 	$(CXX) -I$(INCDIR) $(CXXFLAGS) -c -o $@ $<
