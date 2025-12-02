@@ -11,6 +11,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include <stdio.h>
 
 #include <map>
 
@@ -31,7 +32,21 @@ public:
   Font();
   ~Font();
 
+  // Load a BDF font from file path.
+  // Returns true on success, false if the file cannot be opened or parsed.
   bool LoadFont(const char *path);
+
+  // Load a BDF font from a memory buffer.
+  // The buffer must contain valid BDF font data and must remain valid during
+  // the call. After LoadFont() returns, the buffer can be freed or reused.
+  // Returns true on success, false if buffer is invalid or parsing fails.
+  bool LoadFont(const char *buffer, size_t buffer_size);
+
+  // Load a BDF font from an open FILE stream.
+  // The FILE* must be opened in read mode. The caller is responsible for
+  // closing the FILE* after this call completes.
+  // Returns true on success, false if parsing fails.
+  bool LoadFont(FILE *f);
 
   // Return height of font in pixels. Returns -1 if font has not been loaded.
   int height() const { return font_height_; }

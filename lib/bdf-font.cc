@@ -22,7 +22,6 @@
 #include "graphics.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 #include <algorithm>
@@ -80,6 +79,22 @@ bool Font::LoadFont(const char *path) {
   FILE *f = fopen(path, "r");
   if (f == NULL)
     return false;
+  bool result = LoadFont(f);
+  fclose(f);
+  return result;
+}
+
+bool Font::LoadFont(const char *buffer, size_t buffer_size) {
+  if (!buffer || buffer_size == 0) return false;
+  FILE *f = fmemopen((void *)buffer, buffer_size, "r");
+  if (f == NULL)
+    return false;
+  bool result = LoadFont(f);
+  fclose(f);
+  return result;
+}
+
+bool Font::LoadFont(FILE *f) {
   uint32_t codepoint;
   char buffer[1024];
   int dummy;
@@ -124,7 +139,6 @@ bool Font::LoadFont(const char *path) {
       }
     }
   }
-  fclose(f);
   return true;
 }
 

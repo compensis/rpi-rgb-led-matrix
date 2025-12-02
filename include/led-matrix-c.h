@@ -385,6 +385,9 @@ void set_image(struct LedCanvas *c, int canvas_offset_x, int canvas_offset_y,
 // Load a font given a path to a font file containing a bdf font.
 struct LedFont *load_font(const char *bdf_font_file);
 
+// Load a font given a buffer containing a bdf font.
+struct LedFont *load_font_from_buffer(const char *buffer, size_t buffer_size);
+
 // Read the baseline of a font
 int baseline_font(struct LedFont *font);
 
