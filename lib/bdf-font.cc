@@ -139,6 +139,8 @@ bool Font::LoadFont(FILE *f) {
       }
     }
   }
+  if (glyphs_.empty())
+    return false;
   return true;
 }
 
