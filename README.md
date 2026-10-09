@@ -1,6 +1,10 @@
 Controlling RGB LED display with Raspberry Pi GPIO
 ==================================================
 
+> [!NOTE]
+> This fork adds text wrapping using an optimal-fit algorithm. See the
+> [text wrapping example](examples-api-use/textwrap-example.md) for details.
+
 A library to control commonly available 64x64, 32x32 or 16x32 RGB LED panels
 with the Raspberry Pi. Can support PWM up to 11Bit per channel, providing
 true 24bpp color with CIE1931 profile.
