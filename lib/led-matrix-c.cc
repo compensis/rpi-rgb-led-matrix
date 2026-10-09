@@ -245,7 +245,19 @@ void led_canvas_fill(struct LedCanvas *canvas, uint8_t r, uint8_t g, uint8_t b) 
 
 struct LedFont *load_font(const char *bdf_font_file) {
   rgb_matrix::Font* font = new rgb_matrix::Font();
-  font->LoadFont(bdf_font_file);
+  if (!font->LoadFont(bdf_font_file)) {
+    delete font;
+    return NULL;
+  }
+  return from_font(font);
+}
+
+struct LedFont *load_font_from_buffer(const char *buffer, size_t buffer_size) {
+  rgb_matrix::Font* font = new rgb_matrix::Font();
+  if (!font->LoadFont(buffer, buffer_size)) {
+    delete font;
+    return NULL;
+  }
   return from_font(font);
 }
 
