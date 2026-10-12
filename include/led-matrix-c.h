@@ -391,6 +391,9 @@ void set_image(struct LedCanvas *c, int canvas_offset_x, int canvas_offset_y,
 // Load a font given a path to a font file containing a bdf font.
 struct LedFont *load_font(const char *bdf_font_file);
 
+// Load a font given a buffer containing a bdf font.
+struct LedFont *load_font_from_buffer(const char *buffer, size_t buffer_size);
+
 // Read the baseline of a font
 int baseline_font(struct LedFont *font);
 
@@ -413,6 +416,10 @@ int draw_text(struct LedCanvas *c, struct LedFont *font, int x, int y,
 int vertical_draw_text(struct LedCanvas *c, struct LedFont *font, int x, int y,
                        uint8_t r, uint8_t g, uint8_t b,
                        const char *utf8_text, int kerning_offset);
+
+int draw_text_wrapped(struct LedCanvas *c, struct LedFont *font, int x, int y,
+                      int line_width, uint8_t r, uint8_t g, uint8_t b,
+                      const char *utf8_text, int kerning_offset, int leading);
 
 void draw_circle(struct LedCanvas *c, int x, int y, int radius,
                  uint8_t r, uint8_t g, uint8_t b);
